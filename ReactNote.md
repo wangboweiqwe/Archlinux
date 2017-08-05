@@ -1,6 +1,23 @@
 # React
 - 组件的属性(className)给children：{...this.props}
 - 改变state不使用push方法
+- `const props = { ...this.props };`
+- 组件定义不同背景，在适用的位置设置style属性，然后在子组件里面继承style属性；
+- setState有callback函数
+#键盘事件
+onKeyDown = (e) => {
+  if (e.keyCode === 13 && e.ctrlKey) {
+    e.preventDefault();
+    const { chatValue } = this.state;
+    this.setState({ chatValue: `${chatValue}\n\r` });
+  } else if (e.keyCode === 13) {
+    // 避免回车键换行
+    e.preventDefault();
+    // 下面写你的发送消息的代码
+    this.onSend();
+  }
+}
+
 # 状态提升
 你一定听说过变量提升，函数提升，那么状态提升是什么呢？
 
@@ -72,6 +89,7 @@ const childrenWithProps = React.Children.map(this.props.children,
 	}),
 );
 </pre></code>
+# `this.context`
 <pre><code>this.context用法
 getChildContext() {		// 父组件
 	return {
@@ -85,3 +103,6 @@ Content.contextTypes = {    // 子组件
   USER: PropTypes.object,
 };
 </code></pre>
+- 组件加载顺序：父组件加载异步函数获取`this.context`，并将其传播给子组件，开始加载子组件，子组件运行`componentWillMount`时，异步函数`this.context`可能未完成。
+# localStorage
+在componentWillMount里面使用localStorage对state进行初始化，在事件完成后，改变state并对localStorage赋值。
