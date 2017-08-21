@@ -1,12 +1,12 @@
 # Css
 - border:5px solid red;
 - margin: top left-right button;
-- line-height:
 - display：inline-block;
 - position: relative - absolute;
 - cursor: point;
+- 填满整个元素：父元素设置高度，子元素`height: 100%`
+- css度量运算calc(100% - 36px)
 - hover显示新元素
-- display: table-cell; - vertical-align: middle;
 <pre><code>
 <parent>
 	<child1 />
@@ -33,7 +33,8 @@
 # 对齐
 - margin: auto;
 - 父元素text-align: left | right | center | justify | inherit;
-- 子元素vertical-align: top | text-top | middle | bottom | text-bottom;
+- 子元素为inline，table-cell或者inline-block时`vertical-align: top | text-top | middle | bottom | text-bottom;`table-cell与inline-block中middle显示不同
+- line-height:
 - 图文并排
 <pre><code>
 {
@@ -53,18 +54,20 @@
 - flex-flow: `flex-direction` || `flex-wrap`;
 - justify-content: flex-start | flex-end | center
 - align-items: flex-start | flex-end | center
-- align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+- 多根轴线align-content: flex-start | flex-end | center | space-between | space-around | stretch;
 
 - 保留空白符white-space: normal|pre|nowrap|pre-wrap|pre-line|inherit;
 # Css单位
 - vh：屏幕比例。px:像素。
 # Css选择器
 - .class	#id	element
+- 直接子元素：>
 
 # Html
 - 图片按钮`<input name="submit" type="image" value="ee" src="12.jpg" />`
 - 赋值`localStorage.abc = string`，数字存入localStorage后变为string :(
 - 使用title属性显示提示信息
+- 空格：&nbsp;
 # javaScript
 - Boolean && 变量;
 * Boolean || 变量;
@@ -78,6 +81,9 @@
 - 箭头函数的this，指向其定义位置的this。
 - if块级作用域在ES5与ES6中不同
 - const a = func; 与function a(){}的变量提升方式不同；
+- Object.keys(obj)得到对象的可枚举属性
+- `delete ‘Obj.prop’`删除对象属性
+- 简单的拷贝：`const a = {}`和`a = [...ArrObj]``拷贝属性值，属性值为引用值则拷贝该引用：Object.assign({}, Obj)`
 # node.js
 - string操作不改变原string，只会返回新string。Buffer只改变原Buffer。
 <pre><code>bin => dup

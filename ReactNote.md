@@ -4,7 +4,13 @@
 - `const props = { ...this.props };`
 - 组件定义不同背景，在适用的位置设置style属性，然后在子组件里面继承style属性；
 - setState有callback函数
+- react-router的onEnter设置路由权限
+- 当前地址：`this.context.router.location`
+跳转页面：`this.context.router.push(path)`
+- 将this.props绑定this.state`this.state = { a: this.props.value }`props变化时自动改变state
+
 #键盘事件
+<pre><code>
 onKeyDown = (e) => {
   if (e.keyCode === 13 && e.ctrlKey) {
     e.preventDefault();
@@ -17,6 +23,7 @@ onKeyDown = (e) => {
     this.onSend();
   }
 }
+</code></pre>
 
 # 状态提升
 你一定听说过变量提升，函数提升，那么状态提升是什么呢？
