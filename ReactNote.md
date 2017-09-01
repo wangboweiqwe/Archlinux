@@ -118,7 +118,7 @@ Commen.childContextTypes = {
 Content.contextTypes = {    // 子组件
   USER: PropTypes.object,
 };
+constructor(props, context)
 </code></pre>
-- 组件加载顺序：父组件加载异步函数获取`this.context`，并将其传播给子组件，开始加载子组件，子组件运行`componentWillMount`时，异步函数`this.context`可能未完成。
 # localStorage
 在componentWillMount里面使用localStorage对state进行初始化，在事件完成后，改变state并对localStorage赋值。
