@@ -5,9 +5,19 @@
 - 组件定义不同背景，在适用的位置设置style属性，然后在子组件里面继承style属性；
 - setState有callback函数
 - react-router的onEnter设置路由权限
-- 当前地址：`this.context.router.location`
+- 当前地址：`this.context.router.location`，`this.props.location`
 跳转页面：`this.context.router.push(path)`
 - 将this.props绑定this.state`this.state = { a: this.props.value }`props变化时自动改变state
+- 使用div模拟textarea：属性`contentEditable="plaintext-only"`与`onInput={this.emitChange}`与`ref={(inp) => { this.inputRef = inp }}`，`this.inputRef.innerHTML`获取输入内容。
+<pre><code>
+<div
+  className="input_content"
+  onInput={this.inputChange}
+  contentEditable="plaintext-only"
+  ref={(inp) => { this.inputRef = inp }}
+  onKeyDown={this.onKeyDown}
+/>
+</code></pre>
 
 #键盘事件
 <pre><code>
@@ -52,9 +62,10 @@ class Child extends React.Component {
     return (
       <div>
         <p>{name}：</p>
-        <input value={value}
-               onChange={this.handleChange}
-          />
+        <input
+          value={value}
+          onChange={this.handleChange}
+        />
       </div>
     );
   }
@@ -64,7 +75,6 @@ class Demo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {value: '', name: ''};
-
     this.upDateValue = this.upDateValue.bind(this);
   }
 
@@ -74,7 +84,6 @@ class Demo extends React.Component {
 
   render() {
     const {value} = this.state;
-
     return (
       <div>
         <Child name="组件1" value={value} upDateValue={this.upDateValue} />

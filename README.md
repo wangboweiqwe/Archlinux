@@ -68,6 +68,8 @@
 - 赋值`localStorage.abc = string`，数字存入localStorage后变为string :(
 - 使用title属性显示提示信息
 - 空格：&nbsp;
+- hr color属性设置颜色
+- 兼容性<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 # javaScript
 - Boolean && 变量;
 * Boolean || 变量;
@@ -84,12 +86,27 @@
 - Object.keys(obj)得到对象的可枚举属性
 - `delete ‘Obj.prop’`删除对象属性
 - 简单的拷贝：`const a = {}`和`a = [...ArrObj]``拷贝属性值，属性值为引用值则拷贝该引用：Object.assign({}, Obj)`
+- <pre><code>
+var start = async function () {
+    for (var i = 1; i <= 10; i++) {
+        console.log(`当前是第${i}次等待..`);
+        await sleep(1000);
+    }
+};
+</code></pre>
 # node.js
 - string操作不改变原string，只会返回新string。Buffer只改变原Buffer。
 <pre><code>bin => dup
 var dup = new Buffer(bin.length);
 bin.copy(dup);
 </code></pre>
+# express
+app.use(session({
+  secret: 'recommand 128 bytes random string', // 建议使用 128 个字符的随机字符串
+  cookie: { maxAge: 60 * 1000 },
+	resave: true,
+	saveUninitialized: true
+}));
 # git
 - git记录删除动作：`rm + git commit -am "abc"` 和`git rm + git commit -m "abc"`
 
