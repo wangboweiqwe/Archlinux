@@ -19,7 +19,7 @@
 />
 </code></pre>
 
-#键盘事件
+# 键盘事件
 <pre><code>
 onKeyDown = (e) => {
   if (e.keyCode === 13 && e.ctrlKey) {

@@ -69,13 +69,14 @@
 - 使用title属性显示提示信息
 - 空格：&nbsp;
 - hr color属性设置颜色
-- 兼容性<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+- ie兼容性<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
 # javaScript
 - Boolean && 变量;
 * Boolean || 变量;
 - `JSON.stringify(json)`, arr也是json格式 `JSON.parse(string)`
 - `[...arr, ele, ele]`
-- `t=setTimeout();`与`clearTimeout(t)`;`t=setInterval();`,`clearInterval()`;
+- `t=setTimeout(fun(), N毫秒);`与`clearTimeout(t)`;`t=setInterval();`,`clearInterval(t)`;
 - `a.indexOf(b)`a为字符串或者--数组
 - `a.toFixed(2)`a必须为number，保留小数
 - `Array(len).fill(true)` 填满数组
@@ -84,8 +85,12 @@
 - if块级作用域在ES5与ES6中不同
 - const a = func; 与function a(){}的变量提升方式不同；
 - Object.keys(obj)得到对象的可枚举属性
-- `delete ‘Obj.prop’`删除对象属性
+- `delete 'Obj.prop'`删除对象属性
 - 简单的拷贝：`const a = {}`和`a = [...ArrObj]``拷贝属性值，属性值为引用值则拷贝该引用：Object.assign({}, Obj)`
+- 字符串变量d的特殊用法：{ [d]: !this.state[d] }
+- js不支持负向零宽断言`(?<=aaa)`
+- for循环中let 与var i = 0,在函数中不同
+- 前端全局对象window，node.js全局变量global。全局变量可以用来设置全局变量window.abc
 - <pre><code>
 var start = async function () {
     for (var i = 1; i <= 10; i++) {
@@ -107,8 +112,13 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
+
 # git
 - git记录删除动作：`rm + git commit -am "abc"` 和`git rm + git commit -m "abc"`
+- 更新.gitignore本地缓存删除（改变成未track状态），然后再修改.gitignore
+<pre><code>
+git rm -r --cached build/
+</code></pre>
 
 # Atom快捷键
 - Ctrl+( 查看git改动
@@ -134,7 +144,8 @@ app.use(session({
 - `-` 代表无序列表
 - ` `` `代码字段
 - `<pre><code></code></pre>`代码段落
-#mongodb
+
+# mongodb
 - mongo:打开命令行
 - use DBname: 进入数据库 show dbs | show collections
 - db.COLname.drop 再mongoimport
