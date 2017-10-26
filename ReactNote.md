@@ -1,5 +1,6 @@
 # React
 - 组件的属性(className)给children：{...this.props}
+- React.Children.map(this.props.children, () => { ...... })
 - 改变state不使用push方法
 - `const props = { ...this.props };`
 - 组件定义不同背景，在适用的位置设置style属性，然后在子组件里面继承style属性；
@@ -112,7 +113,7 @@ getChildContext() {		// 父组件
 		USER: this.state.USER,
 	};
 }
-Commen.childContextTypes = {
+Common.childContextTypes = {
   USER: PropTypes.object,
 };
 Content.contextTypes = {    // 子组件

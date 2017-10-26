@@ -80,6 +80,7 @@
 - `a.indexOf(b)`a为字符串或者--数组
 - `a.toFixed(2)`a必须为number，保留小数
 - `Array(len).fill(true)` 填满数组
+- 数组操作： shift(),unshift(),pop(),push()。改变原数组。
 - `window.location`获取当前页面网址信息，可进行页面跳转
 - 箭头函数的this，指向其定义位置的this。
 - if块级作用域在ES5与ES6中不同
@@ -104,6 +105,21 @@ var start = async function () {
 <pre><code>bin => dup
 var dup = new Buffer(bin.length);
 bin.copy(dup);
+</code></pre>
+<pre><code>
+//附件上传
+const uploadFile = (req, res, next) => {
+  //生成multiparty对象，并配置上传目标路径
+  var form = new multiparty.Form({uploadDir: './public/files/'});
+  //上传完成后处理
+  form.parse(req, function(err, fields, files) {
+    var inputFile = files.file[0].path;
+    console.log('inputFile', inputFile);
+    res.writeHead(200, {'content-type': 'text/plain;charset=utf-8'});
+    res.end(inputFile);
+    //res.end(util.inspect({files: inputFile}));
+ });
+};
 </code></pre>
 # express
 app.use(session({
@@ -130,6 +146,7 @@ git rm -r --cached build/
 - pm2 start backend/bin/xiaochuang
 - npm run build
 - ssh root@114.123.123.123
+- close stuck SSH sessions: `~.`
 
 # Yarn
 - yarn add [package]
@@ -148,7 +165,7 @@ git rm -r --cached build/
 # mongodb
 - mongo:打开命令行
 - use DBname: 进入数据库 show dbs | show collections
-- db.COLname.drop 再mongoimport
+- 导入数据要避免与原来的数据重复：db.COLname.drop 再mongoimport
 
 # Archlinux
 study
