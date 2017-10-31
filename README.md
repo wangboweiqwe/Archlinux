@@ -70,7 +70,7 @@
 - 空格：&nbsp;
 - hr color属性设置颜色
 - ie兼容性<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-
+- 只要是有src或href的HTML标签都有跨域的能力。
 # javaScript
 - Boolean && 变量;
 * Boolean || 变量;
@@ -121,6 +121,25 @@ const uploadFile = (req, res, next) => {
  });
 };
 </code></pre>
+<code><pre>
+router.get('/file/:fileName', function(req, res, next) {
+  // 实现文件下载
+  var fileName = req.params.fileName;
+  var filePath = path.join(__dirname, fileName);
+  var stats = fs.statSync(filePath);
+  if(stats.isFile()){
+    res.set({
+      'Content-Type': 'application/octet-stream',
+      'Content-Disposition': 'attachment; filename='+fileName,
+      'Content-Length': stats.size
+    });
+    fs.createReadStream(filePath).pipe(res);
+  } else {
+    res.end(404);
+  }
+});
+</code></pre>
+
 # express
 app.use(session({
   secret: 'recommand 128 bytes random string', // 建议使用 128 个字符的随机字符串
