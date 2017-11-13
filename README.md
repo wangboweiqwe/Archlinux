@@ -7,42 +7,40 @@
 - 填满整个元素：父元素设置高度，子元素`height: 100%`
 - css度量运算calc(100% - 36px)
 - hover显示新元素
-<pre><code>
-<parent>
-	<child1 />
-	<child2 />
-</parent>
-.parent {
-	position: relative;
-	.child1, .child2 {
-		height: 100px;
-		width: 100px;
-	}
-	.child2 {
-		display: none;
-		background: rgba(230, 230, 230, 0.9);
-	}
-}
-.parent:hover .child2 {
-	display: block;
-	position: absolute;
-	top: 0;
-	cursor: pointer;
-}
-</code></pre>
+
+		<parent>
+			<child1/>
+			<child2/>
+		</parent>
+		.parent {
+			position: relative;
+			.child1, .child2 {
+				height: 100px;
+				width: 100px;
+			}
+			.child2 {
+				display: none;
+				background: rgba(230, 230, 230, 0.9);
+			}
+		}
+		.parent:hover .child2 {
+			display: block;
+			position: absolute;
+			top: 0;
+			cursor: pointer;
+		}
 # 对齐
 - margin: auto;
 - 父元素text-align: left | right | center | justify | inherit;
 - 子元素为inline，table-cell或者inline-block时`vertical-align: top | text-top | middle | bottom | text-bottom;`table-cell与inline-block中middle显示不同
 - line-height:
 - 图文并排
-<pre><code>
-{
-	background:url('/images.jpg') no-repeat;
-	padding-left:
-	width:
-}
-</pre></code>
+
+		.dom {
+			background:url('/images.jpg') no-repeat;
+			padding-left:
+			width:
+		}
 - a {display:inline-block;}再设置 width height
 - a {color: #000;}		* 未被访问的链接 *
 - a:visited {color: #3ac1bd;}	* 已被访问的链接 *
@@ -55,7 +53,6 @@
 - justify-content: flex-start | flex-end | center
 - align-items: flex-start | flex-end | center
 - 多根轴线align-content: flex-start | flex-end | center | space-between | space-around | stretch;
-
 - 保留空白符white-space: normal|pre|nowrap|pre-wrap|pre-line|inherit;
 # Css单位
 - vh：屏幕比例。px:像素。
@@ -67,9 +64,9 @@
 - 图片按钮`<input name="submit" type="image" value="ee" src="12.jpg" />`
 - 赋值`localStorage.abc = string`，数字存入localStorage后变为string :(
 - 使用title属性显示提示信息
-- 空格：&nbsp;
-- hr color属性设置颜色
-- ie兼容性<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+- 空格：`&nbsp;`
+- `<hr />` color属性设置颜色
+- ie兼容性`<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">`
 - 只要是有src或href的HTML标签都有跨域的能力。
 # javaScript
 - Boolean && 变量;
@@ -92,71 +89,64 @@
 - js不支持负向零宽断言`(?<=aaa)`
 - for循环中let 与var i = 0,在函数中不同
 - 前端全局对象window，node.js全局变量global。全局变量可以用来设置全局变量window.abc
-- <pre><code>
-var start = async function () {
-    for (var i = 1; i <= 10; i++) {
-        console.log(`当前是第${i}次等待..`);
-        await sleep(1000);
-    }
-};
-</code></pre>
+- async await
+
+		var start = async function () {
+			for (var i = 1; i <= 10; i++) {
+				console.log(`当前是第${i}次等待..`);
+				await sleep(1000);
+			}
+		};
 # node.js
 - string操作不改变原string，只会返回新string。Buffer只改变原Buffer。
-<pre><code>bin => dup
-var dup = new Buffer(bin.length);
-bin.copy(dup);
-</code></pre>
-<pre><code>
-//附件上传
-const uploadFile = (req, res, next) => {
-  //生成multiparty对象，并配置上传目标路径
-  var form = new multiparty.Form({uploadDir: './public/files/'});
-  //上传完成后处理
-  form.parse(req, function(err, fields, files) {
-    var inputFile = files.file[0].path;
-    console.log('inputFile', inputFile);
-    res.writeHead(200, {'content-type': 'text/plain;charset=utf-8'});
-    res.end(inputFile);
-    //res.end(util.inspect({files: inputFile}));
- });
-};
-</code></pre>
+- bin => dup
+
+		var dup = new Buffer(bin.length);
+		bin.copy(dup);
+- 附件上传
+		const uploadFile = (req, res, next) => {
+			//生成multiparty对象，并配置上传目标路径
+			var form = new multiparty.Form({uploadDir: './public/files/'});
+			//上传完成后处理
+			form.parse(req, function(err, fields, files) {
+				var inputFile = files.file[0].path;
+				console.log('inputFile', inputFile);
+				res.writeHead(200, {'content-type': 'text/plain;charset=utf-8'});
+				res.end(inputFile);
+				//res.end(util.inspect({files: inputFile}));
+		});
+		};
 - 实现文件下载
-<pre><code>
-	router.get('/file/:fileName', function(req, res, next) {
-	  var fileName = req.params.fileName;
-	  var filePath = path.join(__dirname, fileName);
-	  var stats = fs.statSync(filePath);
-	  if(stats.isFile()){
-	    res.set({
-	      'Content-Type': 'application/octet-stream',
-	      'Content-Disposition': 'attachment; filename='+fileName,
-	      'Content-Length': stats.size
-	    });
-	    fs.createReadStream(filePath).pipe(res);
-	  } else {
-	    res.end(404);
-	  }
-	});
-</code></pre>
-前端&lt;a&gt;标签加上download属性后就可以下载了
+
+		router.get('/file/:fileName', function(req, res, next) {
+			var fileName = req.params.fileName;
+			var filePath = path.join(__dirname, fileName);
+			var stats = fs.statSync(filePath);
+			if(stats.isFile()){
+				res.set({
+					'Content-Type': 'application/octet-stream',
+					'Content-Disposition': 'attachment; filename='+fileName,
+					'Content-Length': stats.size
+				});
+				fs.createReadStream(filePath).pipe(res);
+			} else {
+				res.end(404);
+			}
+		});
+前端`<a>`标签加上download属性后就可以下载了
 
 # express
-<pre><code>
-	app.use(session({
-	  secret: 'recommand 128 bytes random string', // 建议使用 128 个字符的随机字符串
-	  cookie: { maxAge: 60 * 1000 },
-		resave: true,
-		saveUninitialized: true
-	}));
-</code></pre>
+- 使用session
+		app.use(session({
+			secret: 'recommand 128 bytes random string', // 建议使用 128 个字符的随机字符串
+			cookie: { maxAge: 60 * 1000 },
+			resave: true,
+			saveUninitialized: true
+		}));
 
 # git
 - git记录删除动作：`rm + git commit -am "abc"` 和`git rm + git commit -m "abc"`
-- 更新.gitignore本地缓存删除（改变成未track状态），然后再修改.gitignore
-<pre><code>
-git rm -r --cached build/
-</code></pre>
+- 更新.gitignore本地缓存删除（改变成未track状态）`git rm -r --cached build/`，然后再修改.gitignore
 
 # Atom快捷键
 - Ctrl+( 查看git改动
@@ -182,7 +172,7 @@ git rm -r --cached build/
 - `# ## ###`表示h1,h2,h3
 - `-` 代表无序列表
 - ` `` `代码字段
-- `<pre><code></code></pre>`代码段落
+- 代码段落：缩进四个空格
 
 # mongodb
 - mongo:打开命令行
