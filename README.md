@@ -38,7 +38,7 @@
 - 图文并排
 <pre><code>
 {
-	background:url('images.jpg') no-repeat;
+	background:url('/images.jpg') no-repeat;
 	padding-left:
 	width:
 }
@@ -121,32 +121,35 @@ const uploadFile = (req, res, next) => {
  });
 };
 </code></pre>
-<code><pre>
-router.get('/file/:fileName', function(req, res, next) {
-  // 实现文件下载
-  var fileName = req.params.fileName;
-  var filePath = path.join(__dirname, fileName);
-  var stats = fs.statSync(filePath);
-  if(stats.isFile()){
-    res.set({
-      'Content-Type': 'application/octet-stream',
-      'Content-Disposition': 'attachment; filename='+fileName,
-      'Content-Length': stats.size
-    });
-    fs.createReadStream(filePath).pipe(res);
-  } else {
-    res.end(404);
-  }
-});
+- 实现文件下载
+<pre><code>
+	router.get('/file/:fileName', function(req, res, next) {
+	  var fileName = req.params.fileName;
+	  var filePath = path.join(__dirname, fileName);
+	  var stats = fs.statSync(filePath);
+	  if(stats.isFile()){
+	    res.set({
+	      'Content-Type': 'application/octet-stream',
+	      'Content-Disposition': 'attachment; filename='+fileName,
+	      'Content-Length': stats.size
+	    });
+	    fs.createReadStream(filePath).pipe(res);
+	  } else {
+	    res.end(404);
+	  }
+	});
 </code></pre>
+前端&lt;a&gt;标签加上download属性后就可以下载了
 
 # express
-app.use(session({
-  secret: 'recommand 128 bytes random string', // 建议使用 128 个字符的随机字符串
-  cookie: { maxAge: 60 * 1000 },
-	resave: true,
-	saveUninitialized: true
-}));
+<pre><code>
+	app.use(session({
+	  secret: 'recommand 128 bytes random string', // 建议使用 128 个字符的随机字符串
+	  cookie: { maxAge: 60 * 1000 },
+		resave: true,
+		saveUninitialized: true
+	}));
+</code></pre>
 
 # git
 - git记录删除动作：`rm + git commit -am "abc"` 和`git rm + git commit -m "abc"`
